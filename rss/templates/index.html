@@ -1,0 +1,175 @@
+{% load time_extra %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <style>
+        body {
+            margin-top: 20px;
+            background: #eee;
+        }
+
+        .avatar {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            white-space: nowrap;
+            border-radius: 1000px;
+            vertical-align: bottom
+
+        }
+
+        .avatar i {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #fff;
+            border-radius: 100%
+        }
+
+        .avatar img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border: 0 none;
+            border-radius: 1000px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .avatar-online i {
+            background-color: #4caf50
+        }
+
+        .avatar-off i {
+            background-color: #616161
+        }
+
+        .avatar-busy i {
+            background-color: #ff9800
+        }
+
+        .avatar-away i {
+            background-color: #f44336
+        }
+
+        .avatar-100 {
+            width: 100px
+        }
+
+        .avatar-100 i {
+            height: 20px;
+            width: 20px
+        }
+
+        .avatar-lg {
+            width: 50px
+        }
+
+        .avatar-lg i {
+            height: 12px;
+            width: 12px
+        }
+
+        .avatar-sm {
+            width: 30px
+        }
+
+        .avatar-sm i {
+            height: 8px;
+            width: 8px
+        }
+
+        .avatar-xs {
+            width: 20px
+        }
+
+        .avatar-xs i {
+            height: 7px;
+            width: 7px
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: -1px;
+            background-color: #fff;
+            border: 1px solid transparent;
+        }
+
+        .p3 .is-active {
+            background-color: #1392d5;
+            color: #fff;
+        }
+
+        .pagination {
+            padding: 30px 0;
+        }
+
+        .pagination ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 10px 18px;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6 col-xs-12 col-md-offset-3">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">News Feed</h3>
+            </div>
+            <div class="panel-body">
+                <hr class="margin-bottom-10">
+                <ul class="list-group list-group-dividered list-group-full">
+                    {% for feed in page_obj %}
+                    <li class="list-group-item">
+                        <div class="media">
+                            <div class="media-left">
+                                <a class="avatar avatar-online" href="javascript:void(0)">
+                                    <img src="{{ feed.base_link.img.url }}" alt="...">
+                                    <i></i>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted pull-right">{{ feed.created_at|get_time }}</small>
+                                <h4 class="media-heading">@{{ feed.base_link.name }}</h4>
+                                <a href="{{ feed.link }}">
+                                    <div>{{ feed.title }}</div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="pagination p3" style="display: flex; justify-content: center;">
+                    <ul>
+                        <a href="./?page={{ previous_page }}">
+                            <li>{{ previous_page }}</li>
+                        </a>
+                        <a class="is-active" href="#">
+                            <li>{{ current_page }}</li>
+                        </a>
+                        <a href="./?page={{ next_page }}">
+                            <li>{{ next_page }}</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
