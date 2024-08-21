@@ -1,4 +1,4 @@
-# Regex Query Tool
+# Aggregator
 
 ## Технологии:
 
